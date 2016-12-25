@@ -1,0 +1,54 @@
+package fileHandler;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.xml.stream.XMLStreamException;
+
+public interface IFileReader {
+	/**
+	 * XML reader.
+	 * Initialized StAX reading variables
+	 * @param path of the file to be read
+	 * @throws XMLStreamException the XML stream exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public void initializeReader(String path) throws XMLStreamException, IOException;
+
+	/**
+	 * XML end reader.
+	 * Ends StAX reading variables.
+	 * @param uses XMLReader param
+	 * @throws XMLStreamException the XML stream exception
+	 * @throws IOException
+	 */
+	public void endReader() throws XMLStreamException, IOException;
+	
+	/**
+	 * XML fast forward.
+	 * Runs the StAX reading pointer to the desired node.
+	 * @param parentNode => the node to start reading from (not included)
+	 * @throws XMLStreamException the XML stream exception
+	 */
+	public void fastForward(String parentNode) throws XMLStreamException;
+	/**
+	 * XML read row.
+	 * Reads row and returns [[Name, age][varchar, int]]
+	 * @param parent node to start reading from
+	 * ===> Must use XMLFastForward to reach first occurrance of node only
+	 * @return the array list
+	 * @throws XMLStreamException the XML stream exception
+	 */
+	public ArrayList<ArrayList<String>> readRow(String parentNode) throws XMLStreamException;
+
+	/**
+	 * Copy file.
+	 * Copy file content to another.
+	 * @param source the source file
+	 * @param dest the destination file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public void copyFile(File source, File dest) throws IOException;
+
+}
