@@ -1,6 +1,6 @@
 package dataTypes;
 
-public class IntType extends Type {
+public class IntType extends ObjectType {
 	
 	@Override
 	public boolean isValid(String value) {

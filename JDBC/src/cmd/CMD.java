@@ -8,7 +8,7 @@ import parser.Parser;
 
 /**
  * The class that handles the operations in the CMD (works as a handler for the
- * CMDMain class)
+ * CMDMain class).
  *
  * @author USER
  *
@@ -33,30 +33,36 @@ public class CMD implements ICMD {
 	
 	@Override
 	public void drawTable(LinkedHashMap<String, ArrayList<String>> table) {
-		// string is the key (column name) , arraylist => values
-		ArrayList<Integer> columnsWidth;
-		int tableWidth;
-		ArrayList<String> columnNames;
-		ArrayList<String> row;
-		int colLength;
-		// calculate each column max width
-		columnsWidth = calculateColumnsWidth(table);
-		// find total width of the table (to write - ,|)
-		tableWidth = totalTableWidth(columnsWidth);
-		// draw column names
-		drawHorizontal(tableWidth, '=');
-		columnNames = new ArrayList<String>(table.keySet()); // get column names
-																// (keys)
-		drawRaw(columnNames, columnsWidth, '|');
-		drawHorizontal(tableWidth, '=');
-		// draw each row
-		colLength = (table.get(columnNames.get(0))).size();
-		for (int i = 0; i < colLength; i++) {
-			row = getRow(table, i);
-			drawRaw(row, columnsWidth, '|');
-			drawHorizontal(tableWidth, '-');
+		if (table.isEmpty()) {
+			System.out.println("This table has no columns!");
 		}
-		System.out.println("\n");
+		else {
+			// string is the key (column name) , arraylist => values
+			ArrayList<Integer> columnsWidth;
+			int tableWidth;
+			ArrayList<String> columnNames;
+			ArrayList<String> row;
+			int colLength;
+			// calculate each column max width
+			columnsWidth = calculateColumnsWidth(table);
+			// find total width of the table (to write - ,|)
+			tableWidth = totalTableWidth(columnsWidth);
+			// draw column names
+			drawHorizontal(tableWidth, '=');
+			columnNames = new ArrayList<String>(table.keySet()); // get column names
+																	// (keys)
+			drawRaw(columnNames, columnsWidth, '|');
+			drawHorizontal(tableWidth, '=');
+			// draw each row
+			colLength = (table.get(columnNames.get(0))).size();
+			for (int i = 0; i < colLength; i++) {
+				row = getRow(table, i);
+				drawRaw(row, columnsWidth, '|');
+				drawHorizontal(tableWidth, '-');
+			}
+			System.out.println("\n");	
+		}
+		
 	}
 	
 	private ArrayList<Integer> calculateColumnsWidth(LinkedHashMap<String, ArrayList<String>> table) {
@@ -200,6 +206,7 @@ public class CMD implements ICMD {
 			case 11: //alter drop
 				parser.setDatabaseName(usedDatabase);
 				operationName = "Alter drop";
+				break;
 			default:
 				throw new CMDException("The query is invalid!");
 		}

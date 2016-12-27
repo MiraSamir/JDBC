@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="ERROR">
+    <Appenders>
+        <File name="File" fileName=".logging.log" append="true">
+            <PatternLayout>
+                <pattern>
+                    %d [%-5p] %F:%t - %m%n
+                </pattern>
+            </PatternLayout>
+        </File>
+        <Console name="Console" target="SYSTEM_OUT">
+        <PatternLayout>
+                <pattern>
+                    %d [%-5p] %F:%t - %m%n
+                </pattern>
+            </PatternLayout>
+        </Console>
+    </Appenders>
+   <Loggers>
+   
+ <Logger name="logger.Log4j" level="info" additivity="false">
+           <AppenderRef ref="File"/>
+        </Logger>
+         <Logger name="logger.CLILog" level="info" additivity="false">
+           <AppenderRef ref="Console"/>
+        </Logger>
+ </Loggers>
+</configuration>

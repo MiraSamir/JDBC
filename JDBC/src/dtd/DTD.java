@@ -17,6 +17,7 @@ public class DTD implements IDTD {
 	private BufferedWriter buffer;
 	private FileWriter writer;
 	private String newLine = System.getProperty("line.separator");
+    private Scanner scanner;
 	
 	public DTD(String path) {
 		this.path = path;
@@ -39,7 +40,7 @@ public class DTD implements IDTD {
 		try {
 			String cName;
 			String cType;
-			Scanner scanner = new Scanner(new File (path + File.separator + tableName + ".dtd"));
+			scanner = new Scanner(new File (path + File.separator + tableName + ".dtd"));
 
 			String line = "";
 			while (scanner.hasNextLine()) {
